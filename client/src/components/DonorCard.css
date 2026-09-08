@@ -1,0 +1,99 @@
+.donor-card {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.donor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.donor-card.donor-unavailable {
+  opacity: 0.75;
+}
+
+.donor-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.donor-avatar {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  background: var(--black);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: var(--font-main);
+}
+
+.donor-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.donor-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.donor-location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: var(--font-main);
+}
+
+.donor-availability {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.donor-updated {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-main);
+}
+
+.donor-pincode {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  font-family: var(--font-main);
+}
+
+.donor-contact-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.donor-login-prompt {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-family: var(--font-main);
+}
+
+.donor-unavail-msg {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.5rem;
+  font-family: var(--font-main);
+}
