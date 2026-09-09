@@ -1,0 +1,110 @@
+.sos-card {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.sos-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.sos-card.card-critical {
+  border-left: 5px solid var(--dark-red);
+  background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+}
+
+.sos-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sos-blood-group-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sos-units {
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.sos-badges {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.sos-hospital {
+  margin-bottom: 0.6rem;
+}
+
+.sos-hospital-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.2rem;
+}
+
+.sos-hospital-addr {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.sos-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  font-family: var(--font-main);
+}
+
+.sos-requester {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-main);
+}
+
+.sos-message {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  background: var(--light-gray);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--primary-red);
+  margin-bottom: 0.75rem;
+  font-style: italic;
+  font-family: var(--font-main);
+}
+
+.sos-contact-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sos-owner-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border-gray);
+  padding-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sos-contact-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border-gray);
+  padding-top: 0.5rem;
+  font-family: var(--font-main);
+}
