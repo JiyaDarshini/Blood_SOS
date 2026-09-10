@@ -1,0 +1,36 @@
+.sos-board-page { min-height: calc(100vh - 64px); }
+
+.sos-board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sos-critical-alert {
+  background: var(--dark-red);
+  color: var(--white);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+.filters-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.sos-results-header {
+  margin-bottom: 1rem;
+}
+
+.results-count {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-family: var(--font-main);
+}
