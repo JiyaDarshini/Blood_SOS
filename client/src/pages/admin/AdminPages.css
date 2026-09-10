@@ -1,0 +1,34 @@
+.admin-nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: var(--black);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.admin-nav-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-red);
+  text-decoration: none;
+  color: var(--black);
+}
+.admin-nav-icon { font-size: 1.6rem; margin-bottom: 0.2rem; }
+.admin-nav-card h3 { font-size: 0.95rem; }
+.admin-nav-card p { font-size: 0.78rem; color: var(--text-muted); }
+
+.admin-recent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.dash-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .admin-recent-grid { grid-template-columns: 1fr; }
+}
