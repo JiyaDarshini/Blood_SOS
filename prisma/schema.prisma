@@ -1,0 +1,169 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ──────────────────────────────────────────────
+
+enum Role {
+  DONOR
+  REQUESTER
+  BOTH
+  ADMIN
+}
+
+enum BloodGroup {
+  A_POS
+  A_NEG
+  B_POS
+  B_NEG
+  O_POS
+  O_NEG
+  AB_POS
+  AB_NEG
+}
+
+enum Urgency {
+  CRITICAL
+  URGENT
+  PLANNED
+}
+
+enum SOSStatus {
+  ACTIVE
+  FULFILLED
+  CLOSED
+  CANCELLED
+}
+
+enum ContactChannel {
+  CALL
+  WHATSAPP
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+// ─── Models ─────────────────────────────────────────────
+
+model User {
+  id           String     @id @default(uuid())
+  fullName     String     @map("full_name")
+  email        String     @unique
+  phone        String     @unique
+  passwordHash String     @map("password_hash")
+  role         Role       @default(REQUESTER)
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  donor       Donor?
+  sosRequests SOSRequest[]
+  contactLogs ContactLog[] @relation("UserContacts")
+
+  @@map("users")
+  @@index([email])
+  @@index([phone])
+  @@index([role])
+  @@index([status])
+}
+
+model Donor {
+  id          String     @id @default(uuid())
+  userId      String     @unique @map("user_id")
+  bloodGroup  BloodGroup @map("blood_group")
+  locality    String
+  city        String
+  pincode     String
+  isAvailable Boolean    @default(true) @map("is_available")
+  registeredAt DateTime  @default(now()) @map("registered_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contactLogs ContactLog[] @relation("DonorContacts")
+
+  @@map("donors")
+  @@index([bloodGroup])
+  @@index([locality])
+  @@index([city])
+  @@index([pincode])
+  @@index([isAvailable])
+  @@index([bloodGroup, isAvailable])
+  @@index([city, locality])
+}
+
+model SOSRequest {
+  id              String    @id @default(uuid())
+  requesterId     String    @map("requester_id")
+  bloodGroup      BloodGroup @map("blood_group")
+  unitsRequired   Int       @default(1) @map("units_required")
+  hospitalName    String    @map("hospital_name")
+  hospitalAddress String    @map("hospital_address")
+  locality        String
+  city            String
+  urgency         Urgency   @default(URGENT)
+  contactNumber   String    @map("contact_number")
+  message         String?
+  status          SOSStatus @default(ACTIVE)
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  requester   User        @relation(fields: [requesterId], references: [id], onDelete: Cascade)
+  contactLogs ContactLog[]
+
+  @@map("sos_requests")
+  @@index([bloodGroup])
+  @@index([locality])
+  @@index([city])
+  @@index([urgency])
+  @@index([status])
+  @@index([createdAt])
+  @@index([requesterId])
+  @@index([bloodGroup, status])
+}
+
+model ContactLog {
+  id          String         @id @default(uuid())
+  sosId       String         @map("sos_id")
+  donorId     String         @map("donor_id")
+  userId      String         @map("user_id")
+  channel     ContactChannel
+  contactedAt DateTime       @default(now()) @map("contacted_at")
+
+  // Relations
+  sos   SOSRequest @relation(fields: [sosId], references: [id], onDelete: Cascade)
+  donor Donor      @relation("DonorContacts", fields: [donorId], references: [id], onDelete: Cascade)
+  user  User       @relation("UserContacts", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("contact_logs")
+  @@index([sosId])
+  @@index([donorId])
+  @@index([userId])
+  @@index([contactedAt])
+  @@index([channel])
+}
+
+model Locality {
+  id        String   @id @default(uuid())
+  name      String
+  city      String
+  pincode   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("localities")
+  @@index([city])
+  @@index([pincode])
+  @@unique([name, city])
+}
