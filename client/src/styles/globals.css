@@ -1003,3 +1003,5 @@ input, textarea, select, button, label {
 .table tr:last-child td { border-bottom: none; }
 .table tbody tr:hover { background: var(--light-gray); }
 
+
+/* commit-step-54: components: build responsive Navbar navigation bar */
